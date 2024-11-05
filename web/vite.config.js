@@ -10,6 +10,14 @@ dns.setDefaultResultOrder('verbatim')
 
 const viteConfig = {
   plugins: [redwood()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8911',
+        changeOrigin: true,
+      },
+    },
+  },
 }
 
 export default defineConfig(viteConfig)

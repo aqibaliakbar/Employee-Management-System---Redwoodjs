@@ -21,7 +21,9 @@
     "seed": "yarn rw exec seed"
   },
   "packageManager": "yarn@4.4.0",
-  "resolutions": {
-    "@storybook/react-dom-shim@npm:7.6.17": "https://verdaccio.tobbe.dev/@storybook/react-dom-shim/-/react-dom-shim-8.0.8.tgz"
+  "scripts": {
+    "dev": "rw dev --fwd=\"--port 3000\"",
+    "start:web": "rw serve web --port 3000",
+    "start:api": "rw serve api --port 4000"
   }
 }

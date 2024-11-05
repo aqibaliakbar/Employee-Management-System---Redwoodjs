@@ -48,5 +48,5 @@
     "../.redwood/types/includes/web-*",
     "../types",
     "./types"
-  ]
+, "../api/src/services/employees.js", "../api/src/services/department.js"  ]
 }
