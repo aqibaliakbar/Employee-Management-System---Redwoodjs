@@ -53,19 +53,30 @@ export const employee = async ({ id }) => {
 }
 
 export const employeeStats = async () => {
-  const { data, error } = await supabase.from('employees').select('*')
+  try {
+    const { data, error } = await supabase.from('employees').select('*')
 
-  if (error) throw error
+    if (error) throw error
 
-  const stats = {
-    totalEmployees: data.length,
-    averageSalary:
-      data.reduce((acc, emp) => acc + parseFloat(emp.salary), 0) / data.length,
-    departmentCount: new Set(data.map((emp) => emp.department)).size,
-    averageTenure: calculateAverageTenure(data),
+    const stats = {
+      totalEmployees: data.length,
+      averageSalary:
+        data.reduce((acc, emp) => acc + parseFloat(emp.salary), 0) /
+        data.length,
+      departmentCount: new Set(data.map((emp) => emp.department)).size,
+      averageTenure: calculateAverageTenure(data),
+    }
+
+    return stats
+  } catch (error) {
+    console.error('Error calculating employee stats:', error)
+    return {
+      totalEmployees: 0,
+      averageSalary: 0,
+      departmentCount: 0,
+      averageTenure: 0,
+    }
   }
-
-  return stats
 }
 
 export const createEmployee = async ({ input }) => {

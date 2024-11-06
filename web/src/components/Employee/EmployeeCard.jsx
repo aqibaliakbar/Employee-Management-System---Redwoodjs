@@ -1,19 +1,20 @@
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle
-} from 'src/components/ui/card'
 import {
   Briefcase,
   Building2,
   Mail,
   Calendar,
-  CircleDollarSign
+  CircleDollarSign,
 } from 'lucide-react'
-import { Avatar, AvatarFallback } from "src/components/ui/avatar"
-import { Badge } from "src/components/ui/badge"
+
+import { Avatar, AvatarFallback, AvatarImage } from 'src/components/ui/avatar'
+import { Badge } from 'src/components/ui/badge'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from 'src/components/ui/card'
+import { getAvatarUrl } from 'src/lib/avatar'
 
 const EmployeeCard = ({ employee }) => {
   const getInitials = (firstName, lastName) => {
@@ -22,25 +23,34 @@ const EmployeeCard = ({ employee }) => {
 
   const getStatusColor = (status) => {
     return status === 'ACTIVE'
-      ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-50 hover:text-emerald-700'
-      : 'bg-red-50 text-red-700 hover:bg-red-50 hover:text-red-700'
+      ? 'bg-emerald-950/20 text-black'
+      : 'bg-red-950 text-red-400'
   }
 
   return (
-    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg">
+    <Card className="overflow-hidden transition-all duration-300 hover:bg-accent">
       <CardHeader className="pb-4">
         <div className="flex flex-col items-center space-y-3">
-          <Avatar className="h-20 w-20">
-            <AvatarFallback className="bg-primary/10 text-lg">
+          <Avatar className="h-20 w-20 ring-2 ring-primary/20">
+            <AvatarImage
+              src={getAvatarUrl(
+                employee.firstName,
+                employee.lastName,
+                employee.email
+              )}
+              alt={`${employee.firstName} ${employee.lastName}`}
+            />
+            <AvatarFallback className="bg-accent text-accent-foreground">
               {getInitials(employee.firstName, employee.lastName)}
             </AvatarFallback>
           </Avatar>
           <div className="space-y-1 text-center">
-            <CardTitle className="text-xl">
+            <CardTitle className="text-xl font-semibold">
               {employee.firstName} {employee.lastName}
             </CardTitle>
+            <p className="text-sm text-muted-foreground">{employee.position}</p>
             <Badge
-              variant="secondary"
+              variant="outline"
               className={getStatusColor(employee.status)}
             >
               {employee.status}
@@ -49,20 +59,8 @@ const EmployeeCard = ({ employee }) => {
         </div>
       </CardHeader>
       <CardContent className="grid gap-3">
-        <div className="flex items-center gap-3 rounded-lg border p-3">
-          <div className="rounded-md bg-primary/10 p-1">
-            <Briefcase className="h-4 w-4 text-primary" />
-          </div>
-          <div className="space-y-1">
-            <p className="text-sm font-medium leading-none">Position</p>
-            <p className="text-sm text-muted-foreground">
-              {employee.position}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 rounded-lg border p-3">
-          <div className="rounded-md bg-primary/10 p-1">
+        <div className="flex items-center gap-3 rounded-lg bg-accent p-3">
+          <div className="rounded-md bg-background p-1.5">
             <Building2 className="h-4 w-4 text-primary" />
           </div>
           <div className="space-y-1">
@@ -73,8 +71,8 @@ const EmployeeCard = ({ employee }) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 rounded-lg border p-3">
-          <div className="rounded-md bg-primary/10 p-1">
+        <div className="flex items-center gap-3 rounded-lg bg-accent p-3">
+          <div className="rounded-md bg-background p-1.5">
             <Mail className="h-4 w-4 text-primary" />
           </div>
           <div className="space-y-1">
@@ -85,8 +83,8 @@ const EmployeeCard = ({ employee }) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 rounded-lg border p-3">
-          <div className="rounded-md bg-primary/10 p-1">
+        <div className="flex items-center gap-3 rounded-lg bg-accent p-3">
+          <div className="rounded-md bg-background p-1.5">
             <CircleDollarSign className="h-4 w-4 text-primary" />
           </div>
           <div className="space-y-1">
@@ -97,8 +95,8 @@ const EmployeeCard = ({ employee }) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 rounded-lg border p-3">
-          <div className="rounded-md bg-primary/10 p-1">
+        <div className="flex items-center gap-3 rounded-lg bg-accent p-3">
+          <div className="rounded-md bg-background p-1.5">
             <Calendar className="h-4 w-4 text-primary" />
           </div>
           <div className="space-y-1">

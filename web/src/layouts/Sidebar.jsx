@@ -1,11 +1,12 @@
 // src/components/Sidebar/Sidebar.jsx
 import { Link, routes } from '@redwoodjs/router'
-import { Users, Building2, Home, Settings } from 'lucide-react'
+import { Users, Building2, Home, Settings, Clock, Calendar } from 'lucide-react'
 
 const navigation = [
   { name: 'Dashboard', routeName: 'home', icon: Home },
   { name: 'Employees', routeName: 'employees', icon: Users },
- 
+  { name: 'Shifts', routeName: 'shifts', icon: Clock },
+  { name: 'Attendance', routeName: 'attendance', icon: Calendar },
 ]
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
